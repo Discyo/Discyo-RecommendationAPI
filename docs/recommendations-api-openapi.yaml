@@ -1,0 +1,371 @@
+"openapi": "3.0.2"
+"info":
+  "title": "Recommendations API"
+  "version": "1.0"
+"paths":
+  "/movies/init":
+    "get":
+      "tags":
+        - "movies"
+      "summary": "Get a collection of popular movies for the user initialization process"
+      "operationId": "get_initial_content_movies_init_get"
+      "responses":
+        "200":
+          "description": "Successful Response"
+          "content":
+            "application/json":
+              "schema":
+                "title": "List of popular movies"
+                "type": "array"
+                "items":
+                  "type": "string"
+                "example":
+                  - "1f80832a-4e30-4c00-9371-2a1307c83ff2"
+                  - "ae339bef-a5e2-48a2-9724-e24cc76a7351"
+  "/shows/init":
+    "get":
+      "tags":
+        - "shows"
+      "summary": "Get a collection of popular TV shows for the user initialization process"
+      "operationId": "get_initial_content_shows_init_get"
+      "responses":
+        "200":
+          "description": "Successful Response"
+          "content":
+            "application/json":
+              "schema":
+                "title": "List of popular TV shows"
+                "type": "array"
+                "items":
+                  "type": "string"
+                "example":
+                  - "1f80832a-4e30-4c00-9371-2a1307c83ff2"
+                  - "ae339bef-a5e2-48a2-9724-e24cc76a7351"
+  "/movies/recommendations":
+    "put":
+      "tags":
+        - "movies"
+      "summary": "Get movie recommendations based on the user's interests and ratings"
+      "operationId": "get_recommendations_movies_recommendations_put"
+      "parameters":
+        -
+          "required": false
+          "schema":
+            "title": "Sophisticated"
+            "type": "boolean"
+            "default": false
+          "name": "sophisticated"
+          "in": "query"
+        -
+          "required": false
+          "schema":
+            "title": "Recommendations-Count"
+            "type": "integer"
+            "default": 16
+          "name": "recommendations-count"
+          "in": "header"
+      "requestBody":
+        "content":
+          "application/json":
+            "schema":
+              "$ref": "#/components/schemas/User"
+        "required": true
+      "responses":
+        "200":
+          "description": "Successful Response"
+          "content":
+            "application/json":
+              "schema":
+                "title": "List of recommendations"
+                "type": "array"
+                "items":
+                  "type": "string"
+                "example":
+                  - "1f80832a-4e30-4c00-9371-2a1307c83ff2"
+                  - "ae339bef-a5e2-48a2-9724-e24cc76a7351"
+        "422":
+          "description": "Validation Error"
+          "content":
+            "application/json":
+              "schema":
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/shows/recommendations":
+    "put":
+      "tags":
+        - "shows"
+      "summary": "Get TV show recommendations based on the user's interests and ratings"
+      "operationId": "get_recommendations_shows_recommendations_put"
+      "parameters":
+        -
+          "required": false
+          "schema":
+            "title": "Sophisticated"
+            "type": "boolean"
+            "default": false
+          "name": "sophisticated"
+          "in": "query"
+        -
+          "required": false
+          "schema":
+            "title": "Recommendations-Count"
+            "type": "integer"
+            "default": 16
+          "name": "recommendations-count"
+          "in": "header"
+      "requestBody":
+        "content":
+          "application/json":
+            "schema":
+              "$ref": "#/components/schemas/User"
+        "required": true
+      "responses":
+        "200":
+          "description": "Successful Response"
+          "content":
+            "application/json":
+              "schema":
+                "title": "List of recommendations"
+                "type": "array"
+                "items":
+                  "type": "string"
+                "example":
+                  - "1f80832a-4e30-4c00-9371-2a1307c83ff2"
+                  - "ae339bef-a5e2-48a2-9724-e24cc76a7351"
+        "422":
+          "description": "Validation Error"
+          "content":
+            "application/json":
+              "schema":
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/movies/similar/{wapitch_id}":
+    "get":
+      "tags":
+        - "movies"
+      "summary": "Get movies similar to the specified one"
+      "operationId": "get_similar_movies_similar__wapitch_id__get"
+      "parameters":
+        -
+          "required": true
+          "schema":
+            "title": "Wapitch Id"
+          "name": "wapitch_id"
+          "in": "path"
+        -
+          "required": false
+          "schema":
+            "title": "Provider Id"
+          "name": "provider_id"
+          "in": "query"
+        -
+          "required": false
+          "schema":
+            "title": "Country Code"
+          "name": "country_code"
+          "in": "query"
+        -
+          "required": false
+          "schema":
+            "title": "Count"
+            "type": "integer"
+            "default": 10
+          "name": "count"
+          "in": "query"
+      "responses":
+        "200":
+          "description": "Successful Response"
+          "content":
+            "application/json":
+              "schema":
+                "title": "List of similar movies"
+                "type": "object"
+                "properties":
+                  "page":
+                    "type": "integer"
+                    "example": 0
+                  "total_count":
+                    "type": "integer"
+                    "example": 1
+                  "items":
+                    "type": "array"
+                    "items":
+                      "type": "object"
+                      "properties":
+                        "id":
+                          "type": "string"
+                          "example": "3306fd55-d2a3-4c3d-8a61-47ddf5200ee4"
+                        "tmdb_id":
+                          "type": "integer"
+                          "example": 546554
+        "422":
+          "description": "Validation Error"
+          "content":
+            "application/json":
+              "schema":
+                "$ref": "#/components/schemas/HTTPValidationError"
+  "/shows/similar/{wapitch_id}":
+    "get":
+      "tags":
+        - "shows"
+      "summary": "Get TV shows similar to the specified one"
+      "operationId": "get_similar_shows_similar__wapitch_id__get"
+      "parameters":
+        -
+          "required": true
+          "schema":
+            "title": "Wapitch Id"
+          "name": "wapitch_id"
+          "in": "path"
+        -
+          "required": false
+          "schema":
+            "title": "Provider Id"
+          "name": "provider_id"
+          "in": "query"
+        -
+          "required": false
+          "schema":
+            "title": "Country Code"
+          "name": "country_code"
+          "in": "query"
+        -
+          "required": false
+          "schema":
+            "title": "Count"
+            "type": "integer"
+            "default": 10
+          "name": "count"
+          "in": "query"
+      "responses":
+        "200":
+          "description": "Successful Response"
+          "content":
+            "application/json":
+              "schema":
+                "title": "List of similar TV shows"
+                "type": "object"
+                "properties":
+                  "page":
+                    "type": "integer"
+                    "example": 0
+                  "total_count":
+                    "type": "integer"
+                    "example": 1
+                  "items":
+                    "type": "array"
+                    "items":
+                      "type": "object"
+                      "properties":
+                        "id":
+                          "type": "string"
+                          "example": "3306fd55-d2a3-4c3d-8a61-47ddf5200ee4"
+                        "tmdb_id":
+                          "type": "integer"
+                          "example": 546554
+        "422":
+          "description": "Validation Error"
+          "content":
+            "application/json":
+              "schema":
+                "$ref": "#/components/schemas/HTTPValidationError"
+"components":
+  "schemas":
+    "Interest":
+      "title": "Interest"
+      "required":
+        - "uuid"
+        - "value"
+        - "timestamp"
+      "type": "object"
+      "properties":
+        "uuid":
+          "title": "Uuid"
+          "type": "string"
+          "example": "000443a3-f598-4fc4-9c9d-9d000021818f"
+        "value":
+          "title": "Value"
+          "type": "boolean"
+          "example": false
+        "timestamp":
+          "title": "Timestamp"
+          "type": "string"
+          "format": "date-time"
+          "example": "2019-06-01 12:22"
+    "Rating":
+      "title": "Rating"
+      "required":
+        - "uuid"
+        - "value"
+        - "timestamp"
+      "type": "object"
+      "properties":
+        "uuid":
+          "title": "Uuid"
+          "type": "string"
+          "example": "00017783-07cb-45ba-9a12-1de137275365"
+        "value":
+          "title": "Value"
+          "type": "integer"
+          "example": 0
+        "timestamp":
+          "title": "Timestamp"
+          "type": "string"
+          "format": "date-time"
+          "example": "2019-06-01 12:23"
+    "User":
+      "title": "User"
+      "required":
+        - "country_code"
+      "type": "object"
+      "properties":
+        "country_code":
+          "title": "Country Code"
+          "type": "string"
+          "example": "CZ"
+        "providers":
+          "title": "Providers"
+          "type": "array"
+          "items":
+            "type": "string"
+          "default": []
+          "example": ["eac11c84-03d7-42f4-8e15-f65aad2c8251", "903ca85c-2870-49eb-a85f-1120e2a90936"]
+        "ratings":
+          "title": "Ratings"
+          "type": "array"
+          "items":
+            "$ref": "#/components/schemas/Rating"
+          "default": []
+        "interest":
+          "title": "Interest"
+          "type": "array"
+          "items":
+            "$ref": "#/components/schemas/Interest"
+          "default": []
+    "ValidationError":
+      "title": "ValidationError"
+      "required":
+        - "loc"
+        - "msg"
+        - "type"
+      "type": "object"
+      "properties":
+        "loc":
+          "title": "Location"
+          "type": "array"
+          "items":
+            "type": "string"
+        "msg":
+          "title": "Message"
+          "type": "string"
+        "type":
+          "title": "Error Type"
+          "type": "string"
+
+    "HTTPValidationError":
+      "title": "HTTPValidationError"
+      "type": "object"
+      "properties":
+        "detail":
+          "title": "Detail"
+          "type": "array"
+          "items":
+            "$ref": "#/components/schemas/ValidationError"

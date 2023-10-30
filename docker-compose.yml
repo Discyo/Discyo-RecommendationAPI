@@ -1,0 +1,12 @@
+version: "3"
+services:
+
+  recommendations-api:
+    build:
+      context: ./recommendations-api
+      dockerfile: recommendations-api.dockerfile
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "8M"
+        max-file: "4"
