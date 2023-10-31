@@ -1,10 +1,10 @@
 version: "3"
 services:
 
-  recommendations-api:
+  recommendation-api:
     build:
-      context: ./recommendations-api
-      dockerfile: recommendations-api.dockerfile
+      context: ./recommendation-api
+      dockerfile: recommendation-api.dockerfile
     logging:
       driver: "json-file"
       options:

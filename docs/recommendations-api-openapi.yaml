@@ -1,6 +1,6 @@
 "openapi": "3.0.2"
 "info":
-  "title": "Recommendations API"
+  "title": "Recommendation API"
   "version": "1.0"
 "paths":
   "/movies/init":

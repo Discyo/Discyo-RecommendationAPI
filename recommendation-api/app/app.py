@@ -16,7 +16,7 @@ from fastapi import FastAPI, Header, Request
 
 from data_model import User
 
-app = FastAPI(title="Recommendations API", docs_url="/", version="1.0")
+app = FastAPI(title="Recommendation API", docs_url="/", version="1.0")
 
 
 @app.get('/shows/init', tags=["shows"])
